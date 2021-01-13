@@ -7,7 +7,7 @@ SECRET_KEY = os.environ['SECRET_KEY']
 DEBUG = True if os.environ['DEBUG'] == 'True' else False
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'fyle-sap.herokuapp.com']
 
-print(os.environ['SECRET_KEY'])
+
 INSTALLED_APPS = [
     'corsheaders',
     'django.contrib.admin',
@@ -20,6 +20,9 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
 
     'drf_yasg',
+    'django_filters',
+    
+    'bank',
 ]
 
 MIDDLEWARE = [
@@ -56,8 +59,12 @@ WSGI_APPLICATION = 'server.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': os.environ['DB_NAME'],
+        'USER': os.environ['DB_USER'],
+        'PASSWORD': os.environ['DB_PASSWORD'],
+        'HOST': os.environ['DB_HOST'],
+        'PORT': os.environ['DB_PORT'],
     }
 }
 
